@@ -1,3 +1,23 @@
+.input2
+{
+  margin-top: 5rem;
+  border: 1px solid black;
+}
+.input
+{
+  margin-top: .5rem;
+  border: 1px solid black;
+}
+
+
+.button
+{
+  margin-top: .5rem;
+  background-color: orange;
+  padding: 10px 30px;
+}
+
+
 .App {
   text-align: center;
 }

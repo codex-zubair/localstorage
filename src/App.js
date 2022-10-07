@@ -1,23 +1,54 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import TodoList from './component/TodoList/TodoList';
 
 function App() {
+
+
+  const [list, setList] = useState([]);
+
+
+  useEffect(() => {
+    fetch('data.json')
+      .then(res => res.json()).then(data => setList(data));
+
+  }, [])
+
+
+
+  const addItem = () => {
+
+    const name = document.getElementById('name').value;
+    const price = document.getElementById('price').value;
+
+    setList([...list, { name: `${name}`, price: `${price}` }])
+
+  }
+
+
+  useEffect(() => {
+    localStorage.setItem('key', JSON.stringify(list));
+  }, [list])
+
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <input id='name' className='input2' type="text" placeholder='name' /> <br />
+      <input id='price' className='input' type="text" placeholder='Price' /> <br />
+      <button onClick={() => addItem()} className='button' >Adder</button>
+
+
+      <div className='todo-list-div'>
+        <h1>Todo List</h1>
+
+        {list.map((item, index) => <TodoList key={index} item={item}></TodoList>)}
+
+      </div>
+
     </div>
   );
 }
